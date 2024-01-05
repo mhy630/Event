@@ -1,0 +1,533 @@
+{% extends "eventm/layout.html" %}
+{% load static %}
+
+{% block body %}
+<style>
+        section {
+            padding: 2em;
+            border-radius: 5px; /* Add border-radius for a rounded appearance */
+            margin-bottom: 20px;
+            width: 100%; /* Make section span the width of the website */
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+        }
+
+        #vision {
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px; /* Add border-radius for a rounded appearance */
+            margin: 0%;
+            padding: 0%;
+            width: 100%; /* Make #vision section span the width of the website */
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+            margin-top: -1em; /* Adjust the margin to make the image span behind the header */
+        }
+
+        #vision img {
+            width: 100%; /* Set the width to 100% to cover the entire width of the screen */
+            height: 600px;
+            border-radius: 5px; /* Add border-radius for a rounded appearance */
+            opacity: 0.7; /* Reduce the opacity of the image */
+        }
+        .vision h1{
+            text-align: center;
+            margin-top: 20px;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 20%;
+            left: 50%;
+            font-size: 50px;
+            font-weight: bold;
+            color: #faf8f8;
+        }
+        .vision p {
+            text-align: center;
+            margin-top: 20px;
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 40px;
+            font-weight: bold;
+            color: rgb(247, 244, 244); /* Set text color to white for better readability */
+        }
+        .vision a{
+            text-decoration: none;
+        }
+        .vision button {
+            display:block;
+            margin: 20px auto 0; /* Adjusted margin to place the button below the paragraph */
+            padding: 10px 20px;
+            font-size: 20px;
+            color: #fff;
+            transform: translate(-0%, -500%);
+            background-color: #555;
+            border-color: #0a0a0a;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .vision button:hover {
+            background-color: #333;
+            transition: 0.3s;
+        }
+
+        .events h2 {
+            text-align: center;
+        }
+
+        .events ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: space-between; /* Distribute items evenly along the main axis */
+            flex-wrap: wrap; /* Allow items to wrap to the next line if the container is too narrow */
+        }
+
+        .events ul li {
+            flex: 0 0 30%; /* Allow each item to grow to 30% of the container's width */
+            margin-bottom: 20px;
+        }
+
+        .events img {
+            width: 100%;
+            border-radius: 5px;
+        }
+
+        /* New styles for the slideshow */
+        .slideshow-container {
+        max-width: 100%;
+        position: relative;
+        margin: auto;
+        overflow: hidden;
+    }
+
+    .mySlides {
+        display: none;
+        width: 100%; /* Make each slide span the full width */
+        transition: opacity 0.6s ease;
+    }
+        .slideshow-container img {
+            width: 100%;
+            border-radius: 5px;
+        }
+
+        .dot-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .dot {
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+            cursor: pointer;
+        }
+
+        .active {
+            background-color: #717171;
+        }
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+        }
+
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        .active-events-container {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    .active-events-container {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .active-event {
+        width: 48%; /* Adjusted width to allow some spacing between items */
+        margin-bottom: 20px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-decoration: none; /* Added text-decoration to remove default link styling */
+        color: inherit; /* Inherited color from the parent */
+    }
+
+    .active-event:hover {
+        transition: 0.3s;
+        padding-top: 10px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Added hover effect for a subtle lift */
+    }
+
+    .active-event img {
+        width: 100%;
+        border-radius: 10px 10px 0 0;
+    }
+
+    .event-details {
+        padding: 10px;
+        background-color: #fff;
+        text-align: center;
+        border-radius: 0 0 10px 10px;
+    }
+    /* Testimonial section */
+.testimonials {
+    background-color: #fff;
+    padding: 2em;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.testimonial-slider-container {
+    max-width: 100%;
+    position: relative;
+    margin: auto;
+    overflow: hidden;
+}
+
+.testimonial-slide {
+    display: none;
+    width: 100%;
+    transition: opacity 0.6s ease;
+}
+
+.testimonial-text {
+    text-align: center;
+    font-size: 20px;
+    color: #555;
+}
+
+.testimonial-author {
+    text-align: center;
+    font-style: italic;
+    margin-top: 10px;
+    color: #777;
+}
+
+/* Testimonial slider controls */
+.testimonial-prev, .testimonial-next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: #555;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+}
+
+.testimonial-next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+/* Testimonial slider active slide */
+.testimonial-slide.active {
+    display: block;
+}
+
+         
+ /* Social links with icons in the right corner */
+div.social-links {
+    /* Remove the margin-top property */
+    display: flex;
+    flex-direction: column; /* Display the links in a column */
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin-right: 100px;
+}
+
+div.social-links a {
+    text-decoration: none;
+    color: inherit;
+    margin-bottom: 10px; /* Adjusted margin to add space between icons */
+    font-size: 24px; /* Adjust the font size of the icons */
+}
+div.social-links a i {
+    transition: color 0.3s ease; /* Add transition effect for color change on hover */
+}
+
+div.social-links a:hover i {
+    color: #555; /* Change color on hover */
+}
+    </style>
+
+    <section id="vision" class="vision">
+        <img src="{% static 'images/unsplash.jpg'%}" alt="Image">
+        <h1>Create your Dream Event</h1>
+        <p>Let us bring your vision to life with our expert event planning services.</p>
+        <a href="{% url 'add' %}"><button id="get-started-button">Get Started</button></a>
+    </section>
+    
+    <section id="active-events" class="events">
+        <h2 style="font-size: 50px;">Active Events</h2>
+        <div class="active-events-container" style="margin-left: 10px;">
+            <a href="#event1.html" class="active-event">
+                <img src="{% static 'images/a1.PNG'%}" alt="Upcoming Event 1 Image" height="300px" width="350px">
+                <div class="event-details">
+                    <p>Upcoming Event 1</p>
+                </div>
+            </a>
+            <a href="#event2.html" class="active-event">
+                <img src="{% static 'images/a2.PNG'%}" alt="Upcoming Event 2 Image" height="300px" width="350px">
+                <div class="event-details">
+                    <p>Upcoming Event 2</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <section id="special-events" class="events">
+        <h1 style="text-align: center; font-size: 50px;"> Special Events Organized by Us</h1>
+        <div class="slideshow-container">
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+            <div class="mySlides">
+                <img src="{% static 'images/e1.jpg'%}" alt="Event 1 Image">
+                <p style="text-align: center;">Dive into a world of innovation and expertise at our transformative conference, where ideas converge and collaborations spark.</p>
+            </div>
+            <div class="mySlides">
+                <img src="{% static 'images/e2.jpg'%}" alt="Event 2 Image">
+                <p style="text-align: center;"> Embark on a journey of love and enchantment with our weddings, where every detail is a brushstroke in the canvas of your perfect day.</p>
+            </div>
+            <div class="mySlides">
+                <img src="{% static 'images/e3.jpg' %}" alt="Event 3 Image">
+                <p style="text-align: center;"> Ignite the night and dance under the stars at our electrifying parties, where every beat is a heartbeat of unforgettable joy.</p>
+            </div>
+
+            <div class="dot-container">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+            </div>
+        </div>
+    </section>
+    <section id="testimonials" class="testimonials">
+        <h2 style="text-align: center; font-size: 50px; margin-bottom: 20px;">Testimonials</h2>
+        <div class="testimonial-slider-container">
+            <div class="testimonial-slide">
+                <p class="testimonial-text">"I had an amazing experience with Ethereal Experiences. The attention to detail and creativity exceeded my expectations."</p>
+                <p class="testimonial-author">- John Doe</p>
+            </div>
+            <div class="testimonial-slide">
+                <p class="testimonial-text">"The team at Ethereal Experiences made our special day truly magical. Thank you for creating memories that will last a lifetime."</p>
+                <p class="testimonial-author">- Jane Smith</p>
+            </div>
+            <!-- Add more testimonial slides as needed -->
+        </div>
+    </section>
+    
+    <footer>
+        <h1>Contact Us</h1>
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap;">
+            <div id="map" style="width: 500px; height: 300px; margin-left: 20px;"></div>
+            
+            <!-- Social links with icons in the right corner -->
+            <div class="social-links">
+                <h1>Social Links</h1>
+                <a href="#" style="text-decoration: none; color: inherit;"><i class="fab fa-facebook"></i>  Facebook</a><br>
+                <a href="#" style="text-decoration: none; color: inherit;"><i class="fab fa-twitter"></i>  Twitter</a><br>
+                <a href="#" style="text-decoration: none; color: inherit;"><i class="fab fa-instagram"></i>  Instagram</a>
+            </div>
+        </div>
+        
+    </footer>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js" defer></script>
+
+<script>
+    // Initialize variables for slide and testimonial indices
+    let slideIndex = 1;
+    let testimonialIndex = 0;
+
+    document.addEventListener('DOMContentLoaded', function () {
+    // Initialize the map
+    initMap();
+
+    // Show slides
+    showSlides();
+
+    // Show testimonials
+    showTestimonials();
+});
+
+
+    // Function to initialize the map
+    function initMap() {
+        // Create a map centered at Islamabad
+        const map = L.map('map').setView([33.6844, 73.0479], 15);
+
+        // Add a tile layer from OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Add a marker to the map
+        const marker = L.marker([33.6844, 73.0479]).addTo(map)
+            .bindPopup('Islamabad')
+            .openPopup();
+    }
+    function showSlides() {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("dot");
+
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+
+        slideIndex++;
+        if (slideIndex > slides.length) {
+            slideIndex = 1;
+        }
+
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+
+        // Call the function recursively after 5 seconds
+        setTimeout(showSlides, 5000);
+    }
+
+    // Function to show testimonials
+    function showTestimonials() {
+        let i;
+        let testimonialSlides = document.getElementsByClassName("testimonial-slide");
+
+        for (i = 0; i < testimonialSlides.length; i++) {
+            testimonialSlides[i].style.display = "none";
+        }
+
+        testimonialIndex++;
+        if (testimonialIndex > testimonialSlides.length) {
+            testimonialIndex = 1;
+        }
+
+        testimonialSlides[testimonialIndex - 1].style.display = "block";
+
+        // Call the function recursively after 5 seconds
+        setTimeout(showTestimonials, 5000);
+    }
+
+    // Function to navigate to the next or previous slide
+    function plusSlides(n) {
+        showSlide(slideIndex += n);
+    }
+
+    // Function to navigate to a specific slide
+    function currentSlide(n) {
+        showSlide(slideIndex = n);
+    }
+
+    // Function to show a specific slide
+    function showSlide(n) {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("dot");
+
+        if (n > slides.length) {
+            slideIndex = 1;
+        }
+
+        if (n < 1) {
+            slideIndex = slides.length;
+        }
+
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+    } 
+    function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(e) {
+  if (!e.target.matches('.dropbtn')) {
+  var myDropdown = document.getElementById("myDropdown");
+    if (myDropdown.classList.contains('show')) {
+      myDropdown.classList.remove('show');
+    }
+  }
+}
+  $(document).ready(function () {
+    // Show a notification if the user is not logged in when clicking "Add Event" or "Get Started" links
+    function showLoginWarning() {
+      // Check if the user is authenticated using Django template tag
+      var isAuthenticated = "{% if request.user.is_authenticated %}true{% else %}false{% endif %}";
+
+      if (isAuthenticated === "false") {
+        // Show a SweetAlert notification
+        Swal.fire({
+          icon: 'warning',
+          title: 'Login Required',
+          text: 'You need to login first to get started.',
+          showCancelButton: true,
+          confirmButtonText: 'Login',
+          cancelButtonText: 'Cancel'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // Redirect to the login page
+            window.location.href = "{% url 'loginu_view' %}";
+          }
+        });
+        return false; // Cancel the default action of the link
+      }
+
+      return true; // Continue with the default action of the link
+    }
+
+    // Handle the click event for the "Add Event" link
+    $('#add-event-link').click(function (e) {
+      e.preventDefault();
+      if (showLoginWarning()) {
+        // Redirect to the "Add Event" page
+        window.location.href = "{% url 'add' %}";
+      }
+    });
+
+    // Handle the click event for the "Get Started" button
+    $('#get-started-button').click(function (e) {
+      e.preventDefault();
+      if (showLoginWarning()) {
+        // Implement the action for the "Get Started" button here
+        // For example, you can redirect to a specific page
+        window.location.href = "{% url 'add' %}";
+      }
+    });
+  });
+
+</script>
+
+{% endblock %}

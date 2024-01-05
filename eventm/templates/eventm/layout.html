@@ -1,0 +1,92 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'css/layout.css'%}">
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+  $(document).ready(function () {
+    // Show a notification if the user is not logged in when clicking "Add Event" link
+    $('#add-event-link').click(function (e) {
+      e.preventDefault();
+
+      // Check if the user is authenticated using Django template tag
+      var isAuthenticated = "{% if request.user.is_authenticated %}true{% else %}false{% endif %}";
+
+      if (isAuthenticated === "false") {
+        // Show a SweetAlert notification
+        Swal.fire({
+          icon: 'warning',
+          title: 'Login Required',
+          text: 'You need to login first to add an event.',
+          showCancelButton: true,
+          confirmButtonText: 'Login',
+          cancelButtonText: 'Cancel'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // Redirect to the login page
+            window.location.href = "{% url 'loginu_view' %}";
+          }
+        });
+      } else {
+        // Redirect to the "Add Event" page
+        window.location.href = "{% url 'add' %}";
+      }
+    });
+  });
+</script>
+  <title>Ethereal Experience</title>
+</head>
+
+<body>
+  <header>
+    <h1 style="color: #fff;">Ethereal <em>Experiences </em></h1>
+    <nav>
+      <a href="{% url 'index' %}">Home</a>
+
+      <a href="{% url 'index' %}#active-events">Active Events</a>
+      <a href="#" id="add-event-link" data-is-authenticated="{% if request.user.is_authenticated %}true{% else %}false{% endif %}">Register an Event</a>
+      <a href="{% url 'contact' %}">Contact Us</a>
+      <div class="dropdown" style="margin-right: 20px;">
+        <button class="dropbtn" onclick="myFunction()">Login
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content" id="myDropdown">
+          <a href="{% url 'signup_view' %}">User</a>
+          <a href="{% url 'logina_view' %}">Admin</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+  {% block body %}
+  {% endblock %}
+  <footer>
+    <p class="footer-text">&copy; 2023 Ethereal Experiences. All rights reserved.</p>
+  </footer>
+</body>
+
+</html>
+<script>
+  // Toggle the 'show' class when the button is clicked
+  function myFunction() {
+    var myDropdown = document.getElementById("myDropdown");
+    myDropdown.classList.toggle("show");
+  }
+
+  // Close the dropdown if the user clicks outside of it
+  window.onclick = function (e) {
+    if (!e.target.matches('.dropbtn')) {
+      var myDropdown = document.getElementById("myDropdown");
+      if (myDropdown.classList.contains('show')) {
+        myDropdown.classList.remove('show');
+      }
+    }
+  }
+</script>

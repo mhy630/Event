@@ -1,0 +1,60 @@
+{% extends "eventm/dashboard.html" %}
+{% block body %}
+    <div class="total-events-container">
+      <!-- Container for total events -->
+      <div>
+        <h3>Total Events</h3>
+        <p id="total-events">0</p>
+      </div>
+
+      <!-- Container for total attendees -->
+      <div>
+        <h3>Total Attendees</h3>
+        <p id="total-attendees">0</p>
+      </div>
+    </div>
+
+    <div class="charts-container">
+      <!-- Bar chart for event categories -->
+      <div class="chart-container">
+        <img src="data:image/png;base64,{{ category_base64 }}" alt="Event Category Comparison">
+        <p>Event Category</p>
+      </div>
+
+      <!-- Pie chart for event status -->
+      <div class="chart-container">
+        <img src="data:image/png;base64,{{ status_base64 }}" alt="Event Status Distribution">
+        <p>Event Status</p>
+      </div>
+    </div>
+
+  <!-- JavaScript to increment numbers on page load -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Simulate total events and attendees (you can replace these values with actual data)
+      var totalEvents = 0;
+      var totalAttendees = 0;
+
+      // Select the total events and attendees elements
+      var totalEventsElement = document.getElementById('total-events');
+      var totalAttendeesElement = document.getElementById('total-attendees');
+
+      // Increment the numbers with a small delay to create a counting effect
+      function incrementNumbers() {
+        if (totalEvents <= 20) {
+          totalEventsElement.textContent = totalEvents++;
+        }
+      }
+
+      function incrementAttendees() {
+        if (totalAttendees <= 50) {
+          totalAttendeesElement.textContent = totalAttendees++;
+        }
+      }
+
+      // Call the increment functions on page load
+      setInterval(incrementNumbers, 50); // Adjust the delay as needed
+      setInterval(incrementAttendees, 50); // Adjust the delay as needed
+    });
+  </script>
+{% endblock %}

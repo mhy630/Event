@@ -1,0 +1,20 @@
+{% extends "eventm/base1.html" %}
+{% block body %}
+    <div id="loginContainer">
+        <form id="loginForm" method="post" action="{% url 'loginu_view' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            <div class="form-field">
+                <a class="toggle-link" href="{% url 'signup_view' %}">Create an Account?</a>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+{% endblock %}

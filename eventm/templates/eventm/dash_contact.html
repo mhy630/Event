@@ -1,0 +1,27 @@
+{% extends "eventm/dashboard.html" %}
+{% block body %}
+<table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Message</th>
+        <th>Action</th>  <!-- New column for the "Reply" button -->
+      </tr>
+    </thead>
+    <tbody>
+      {% for entry in contact_entries %}
+        <tr>
+          <td>{{ entry.name }}</td>
+          <td>{{ entry.email }}</td>
+          <td>{{ entry.message }}</td>
+          <td>
+            <!-- Add a "Reply" button with a link to a reply view -->
+            <a href="#" class="reply-button">Reply</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}

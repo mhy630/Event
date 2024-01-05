@@ -1,0 +1,25 @@
+{% extends "eventm/dashboard.html" %}
+{% block body %}
+  {% if all_events %}
+    <h1>Pending Events</h1>
+    {% for entry in all_events %}
+      <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+        <p style="font-size: 18px; font-weight: bold;">Name: {{ entry.name }}</p>
+        <p><strong>Description:</strong> {{ entry.description }}</p>
+        <p><strong>Location:</strong> {{ entry.location }}</p>
+        <form method="post" action="{% url 'approve_event' entry.id %}">
+          {% csrf_token %}
+          <input type="hidden" name="event_id" value="{{ entry.id }}">
+          <button type="submit" style="background-color: #4CAF50; color: white; padding: 8px 12px; border: none; border-radius: 4px; cursor: pointer;">Approve</button>
+        </form>
+        <form method="post" action="{% url 'reject_event' entry.id %}">
+          {% csrf_token %}
+          <input type="hidden" name="event_id" value="{{ entry.id }}">
+          <button type="submit" style="background-color: #D32F2F; color: white; padding: 8px 12px; border: none; border-radius: 4px; cursor: pointer;">Reject</button>
+        </form>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>No pending events available.</p>
+  {% endif %}
+{% endblock %}

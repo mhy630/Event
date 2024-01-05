@@ -1,0 +1,15 @@
+{% extends "eventm/dashboard.html" %}
+{% block body %}
+  {% if approved_events %}
+    <h1>Approved Events</h1>
+    {% for event in approved_events %}
+      <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+        <p style="font-size: 18px; font-weight: bold;">Name: {{ event.name }}</p>
+        <p><strong>Description:</strong> {{ event.description }}</p>
+        <p><strong>Location:</strong> {{ event.location }}</p>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>No approved events available.</p>
+  {% endif %}
+{% endblock %}

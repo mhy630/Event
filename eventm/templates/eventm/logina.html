@@ -1,0 +1,16 @@
+{% extends "eventm/base.html" %}
+{% block body %}
+<div id="loginContainer">
+    <form id="loginForm" method="post" action="{% url 'logina_view' %}" onsubmit="return validateForm()">
+        {% csrf_token %}
+        <label for="username"><i class="fa-solid fa-user-shield"></i> Admin</label>
+        <input type="text" id="username" name="username" placeholder="Username">
+        <label for="password"><i class="fas fa-lock"></i> Password</label>
+        <input type="password" id="password" name="password" placeholder="Password">
+        <button type="submit"><i class="fas fa-sign-in-alt"></i> Login</button>
+        <input type="hidden" id="base64Image" name="image" required>
+        <p style="font-size: 15px;"><span style="color: red;">**</span>Facial Authentication required</p>
+        <div id="imageError" class="error-message"></div>
+    </form>
+</div>
+{% endblock %}

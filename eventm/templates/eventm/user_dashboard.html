@@ -1,0 +1,62 @@
+{% extends "eventm/user_dash.html" %}
+
+{% block body %}
+<h1>Your Dashboard</h1>
+  <div class="dashboard-container">
+
+
+    {% if registered_events %}
+      <h2>Your Events</h2>
+      <ul>
+        {% for event in registered_events %}
+          <li>
+            <strong>{{ event.name }}</strong> - {{ event.description }} (Status: {{ event.status }})
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>You are not registered for any approved events yet.</p>
+    {% endif %}
+
+    <!-- Display approved events -->
+    {% if approved_events %}
+      <div class="active-events-container">
+        <h2>Active Events</h2>
+        {% for event in approved_events %}
+          <div class="event-item">
+            <p>{{ event.name }}</p>
+            <p><a href="{% url 'buy_tickets' event_id=event.id %}">Buy Tickets for {{ event.name }}</a></p>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>No active events at the moment.</p>
+    {% endif %}
+  </div>
+
+  <style>
+    /* Add these styles directly within the HTML file */
+    .dashboard-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .active-events-container {
+      margin-top: 20px;
+      border: 1px solid #ddd;
+      padding: 10px;
+    }
+
+    .event-item {
+      margin-bottom: 10px;
+      background-color: #f9f9f9;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .event-item a {
+      color: #3498db;
+      text-decoration: none;
+    }
+  </style>
+{% endblock %}

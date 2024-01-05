@@ -1,0 +1,199 @@
+body {
+    font-family: Roboto, -apple-system, 'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
+    background-color: #333a55;
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+#videoContainer {
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 900px;
+    margin: 0 auto 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    background-color: rgb(73, 79, 99, 0.8);
+}
+
+
+#video,
+#canvas {
+    background: #eef9fe;
+    display: block;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    margin-right: 10px;
+    width: 320px;
+    /* Decreased size */
+    height: 240px;
+    /* Decreased size */
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Center align form items */
+}
+
+form label{
+    border: none;
+    margin-bottom: 10px;
+}
+form input {
+    width: 250px;  
+    background: #eef9fe;
+    border: 1px solid #cddbef;
+    border-radius: 2px;
+    height: 30px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    height: 30px;
+}
+form input::placeholder{
+    text-align: center;
+}
+form i {
+    margin-right: 10px;
+}
+
+form .fa {
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+button {
+    width: 150px;
+    /* Button width */
+    margin: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    color: #fbfdff;
+    background: #9ed14d;
+}
+
+#startVideo {
+    background-color: #2196f3;
+}
+
+.error-message {
+    color: red;
+    margin-top: 5px;
+}
+
+button:hover {
+    transition: 0.3s;
+    background-color: #5d945f;
+}
+
+#startVideo:hover {
+    transition: 0.3s;
+    background-color: #497ba5;
+}
+
+
+#signupContainer,
+#loginContainer {
+    font-size: 20px;
+    color: #fff;
+    max-width: 500px;
+    margin: 20px auto 0;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    background-color: rgb(73, 79, 99, 0.8);
+}
+#signupContainer form,
+#loginContainer form {
+    align-items: center;
+    /* Align form items in the center */
+    display: flex;
+    flex-direction: column;
+}
+
+#signupContainer form .form-field,
+#loginContainer form .form-field {
+    display: flex;
+    flex-direction: column;
+    /* Updated to column */
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+#signupContainer form .form-field label,
+#loginContainer form .form-field label {
+    margin-bottom: 5px;
+    /* Adjusted margin */
+    width: 100%;
+    /* Full width */
+}
+
+#signupContainer form .form-field input,
+#loginContainer form .form-field input {
+    flex: 1;
+    background: #eef9fe;
+    border: 1px solid #cddbef;
+    border-radius: 5px;
+    height: 30px;
+    padding: 5px;
+    width: 300px;
+    /* Set the width to your desired value */
+}
+
+#signupContainer form .form-field input::placeholder,
+#loginContainer form .form-field input::placeholder {
+    text-align: center;
+}
+
+#signupContainer form button,
+#loginContainer form button {
+    align-self: center;
+    /* Center the button within the form */
+    width: 150px;
+    margin: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    color: #fbfdff;
+    background: #9ed14d;
+}
+
+button {
+    width: 150px;
+    margin: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    color: #fbfdff;
+    background: #9ed14d;
+}
+
+.error-message {
+    color: red;
+    margin-top: 5px;
+}
+
+
+.toggle-link {
+    cursor: pointer;
+    color: #9ed14d;
+    text-decoration: none;
+}
+
+.toggle-link:hover {
+    color: #5d945f;
+}
